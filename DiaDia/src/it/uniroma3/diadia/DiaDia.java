@@ -18,7 +18,7 @@ import it.uniroma3.diadia.comandi.ComandoVecchio;
  *         (da un'idea di Michael Kolling and David J. Barnes) 
  *          
  * @version base
- */
+ */ 
 
 public class DiaDia {
 
