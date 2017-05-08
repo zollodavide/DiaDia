@@ -42,8 +42,14 @@ public class BorsaTest {
 	}
 	
 	@Test
-	public void testLunghezzaArrayAttrezzi() {
-		assertEquals(10, prova.getAttrezzi().length);
+	public void testLunghezzaListaAttrezziVuota() {
+		assertEquals(0, prova.getAttrezzi().size());
+	}
+	
+	@Test
+	public void testLunghezzaListaAttrezziNonVuota() {
+		prova = this.borsaConOggetti();
+		assertEquals(3, prova.getAttrezzi().size());
 	}
 	
 	@Test
@@ -87,14 +93,14 @@ public class BorsaTest {
 		assertFalse(prova.addAttrezzo(inaggiungibile));
 	}
 	
-	@Test
+	/*@Test
 	public void testAddAttrezzoConBorsaPiena() {
 		Attrezzo attrezzo = new Attrezzo("att", 1);
-		for(int i=0; i<prova.getAttrezzi().length; i++)
+		for(int i=0; i<prova.getAttrezzi().len; i++)
 			prova.addAttrezzo(attrezzo);
 		
 		assertFalse(prova.addAttrezzo(attrezzo));	
-	}
+	}*/
 	
 	@Test
 	public void testAddAttrezzoConPesoComplessivoMaggioreDelMassimo() {

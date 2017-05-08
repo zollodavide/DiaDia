@@ -14,20 +14,21 @@ public class StanzaTest {
 	public void setUp() {
 		this.prova = new Stanza("stanza");
 	}
+	
 
 	@Test
 	public void testAddAttrezzo() {
 		assertTrue(prova.addAttrezzo(new Attrezzo("prova", 2)));
 	}
 	
-	@Test
+	/*@Test
 	public void testAddAttrezzoStanzaPiena() {
 		Attrezzo ogg = new Attrezzo("oggetto", 1);		
 		for(int i=0;i<prova.getAttrezzi().length; i++)
 			prova.getAttrezzi()[i] = ogg;
 		
 		assertFalse(prova.addAttrezzo(new Attrezzo("prova", 2)));
-	}
+	}*/
 	
 	@Test
 	public void testGetStanzaAdiacente() {
