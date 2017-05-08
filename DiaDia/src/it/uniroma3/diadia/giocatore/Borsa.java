@@ -3,7 +3,9 @@ package it.uniroma3.diadia.giocatore;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.Comparator;
 
 /**
  * Questa classe ha la responsabilit� di memorizzare l'insieme di attrezzi che 
@@ -23,6 +25,27 @@ public class Borsa {
 	//private Attrezzo[] attrezzi;
 	//private int numeroAttrezzi;
 	private int pesoMax;
+	
+	
+	private class ComparatorePerPeso implements Comparator<Attrezzo> {
+
+		@Override
+		public int compare(Attrezzo o1, Attrezzo o2) {
+			return o1.getPeso() - o2.getPeso();
+		}
+		
+	}
+	
+	// NON ANCORA IMPLEMENTATO
+	/*
+	private class ComparatorePerNome implements Comparator<Attrezzo> {
+
+		@Override
+		public int compare(Attrezzo o1, Attrezzo o2) {
+			return o1.getNome().compareTo(o2.getNome());
+		}
+		
+	}*/
 
 
 	/**
@@ -43,7 +66,7 @@ public class Borsa {
 	 */
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
-		this.attrezzi = new ArrayList<Attrezzo>(); // speriamo che bastino...
+		this.attrezzi = new ArrayList<Attrezzo>();
 		//this.numeroAttrezzi = 0;
 
 	}
@@ -67,15 +90,14 @@ public class Borsa {
 
 		else if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
 			return false;
+		
+		
+		return this.attrezzi.add(attrezzo);
 
 		/*else if (this.numeroAttrezzi==10) ///////////////////DA MODIFICARE
 			return false;*/
 
-		else {
-
-			if(this.attrezzi.add(attrezzo))
-				return true;
-			else
+	
 
 				/*for(int i =0; i<this.attrezzi.length; i++) {
 				if(this.attrezzi[i]==null) {
@@ -84,8 +106,8 @@ public class Borsa {
 					return true; 
 				}	
 			}	*/	
-				return false; 	//Se c'� qualche tipo di problema al momento di aggiungere un oggetto ritorna false
-		}
+				 	//Se c'� qualche tipo di problema al momento di aggiungere un oggetto ritorna false
+		
 	}
 
 	/**
@@ -192,7 +214,7 @@ public class Borsa {
 		
 		while(it.hasNext() && !rimosso) {
 			Attrezzo cercato = it.next();
-			
+	
 			if(cercato.getNome().equals(nomeAttrezzo)) {
 				a = cercato;
 				it.remove();
@@ -253,7 +275,22 @@ public class Borsa {
 			s.append("Borsa vuota");
 
 		return s.toString();
-
 	}
+	
+	
+	public List<Attrezzo> getContenutoOrdinatoPerPeso() {
+		List<Attrezzo> ordinata = new ArrayList<Attrezzo>();
+		ordinata.addAll(this.attrezzi);
+		Collections.sort(ordinata, new ComparatorePerPeso());
+		
+		return ordinata; 
+	}
+	
+	
+	/*public SortedSet<Attrezzo> getContenutoOrdinatoPerNome() {
+		
+	}*/
+	
+	
 
 }

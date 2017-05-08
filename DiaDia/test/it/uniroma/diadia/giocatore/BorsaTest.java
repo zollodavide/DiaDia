@@ -2,6 +2,8 @@ package it.uniroma.diadia.giocatore;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -169,6 +171,21 @@ public class BorsaTest {
 	public void testRemoveAttrezzoNull() {
 		String stringaNulla = null;
 		assertNull(prova.removeAttrezzo(stringaNulla));
+	}
+	
+	@Test
+	public void testGetContenutoPerPeso() {
+		Attrezzo attrezzo_1 = new Attrezzo("attrezzoPos1", 5);
+		Attrezzo attrezzo_2 = new Attrezzo("attrezzoPos2", 2);
+		Attrezzo attrezzo_3 = new Attrezzo("attrezzoPos3", 3);
+		prova.addAttrezzo(attrezzo_1);
+		prova.addAttrezzo(attrezzo_2);
+		prova.addAttrezzo(attrezzo_3);
+		List<Attrezzo> ordinato = prova.getContenutoOrdinatoPerPeso();
+		assertEquals(attrezzo_2, ordinato.get(0));
+		assertEquals(attrezzo_3, ordinato.get(1));
+		assertEquals(attrezzo_1, ordinato.get(2));
+		
 	}
 	
 }
