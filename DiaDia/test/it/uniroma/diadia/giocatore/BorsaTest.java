@@ -2,7 +2,9 @@ package it.uniroma.diadia.giocatore;
 
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.SortedSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -175,17 +177,80 @@ public class BorsaTest {
 	
 	@Test
 	public void testGetContenutoPerPeso() {
-		Attrezzo attrezzo_1 = new Attrezzo("attrezzoPos1", 5);
-		Attrezzo attrezzo_2 = new Attrezzo("attrezzoPos2", 2);
-		Attrezzo attrezzo_3 = new Attrezzo("attrezzoPos3", 3);
-		prova.addAttrezzo(attrezzo_1);
-		prova.addAttrezzo(attrezzo_2);
-		prova.addAttrezzo(attrezzo_3);
-		List<Attrezzo> ordinato = prova.getContenutoOrdinatoPerPeso();
-		assertEquals(attrezzo_2, ordinato.get(0));
-		assertEquals(attrezzo_3, ordinato.get(1));
-		assertEquals(attrezzo_1, ordinato.get(2));
-		
+		Borsa prova2 = new Borsa(50);
+		Attrezzo piombo = new Attrezzo("piombo", 10);
+		Attrezzo ps = new Attrezzo("ps", 5);
+		Attrezzo libro = new Attrezzo("libro", 5);
+		Attrezzo piuma = new Attrezzo("piuma", 1);
+		assertTrue(prova2.addAttrezzo(piombo));
+		assertTrue(prova2.addAttrezzo(ps));
+		assertTrue(prova2.addAttrezzo(libro));
+		assertTrue(prova2.addAttrezzo(piuma));
+		List<Attrezzo> ordinato = prova2.getContenutoOrdinatoPerPeso();
+		assertEquals(piuma, ordinato.get(0));
+		assertEquals(libro, ordinato.get(1));
+		assertEquals(ps, ordinato.get(2));
+		assertEquals(piombo, ordinato.get(3));
+	}
+	
+	@Test
+	public void testGetContenutoPerPeso_Minimale() {
+		Attrezzo att1 = new Attrezzo("b", 2);
+		Attrezzo att2 = new Attrezzo("d", 4);
+		Attrezzo att3 = new Attrezzo("a", 1);
+		Attrezzo att4 = new Attrezzo("c", 3);
+		prova.addAttrezzo(att1);
+		prova.addAttrezzo(att2);
+		prova.addAttrezzo(att3);
+		prova.addAttrezzo(att4);
+		List<Attrezzo> ordinato= prova.getContenutoOrdinatoPerPeso();
+		assertFalse(ordinato.isEmpty());
+		Iterator<Attrezzo> it = ordinato.iterator();
+		assertEquals(att3, it.next());
+		assertEquals(att1, it.next());
+		assertEquals(att4, it.next());
+		assertEquals(att2, it.next());
+	}
+	
+	
+	
+	@Test
+	public void testGetContenutoPerNome() {
+		Borsa prova2 = new Borsa(50);
+		Attrezzo piombo = new Attrezzo("piombo", 10);
+		Attrezzo ps = new Attrezzo("ps", 5);
+		Attrezzo libro = new Attrezzo("libro", 5);
+		Attrezzo piuma = new Attrezzo("piuma", 1);
+		assertTrue(prova2.addAttrezzo(piombo));
+		assertTrue(prova2.addAttrezzo(ps));
+		assertTrue(prova2.addAttrezzo(libro));
+		assertTrue(prova2.addAttrezzo(piuma));
+		SortedSet<Attrezzo> ordinato= prova2.getContenutoOrdinatoPerNome();
+		assertFalse(ordinato.isEmpty());
+		Iterator<Attrezzo> it = ordinato.iterator();
+		assertEquals(libro, it.next());
+		assertEquals(piombo, it.next());
+		assertEquals(piuma, it.next());
+		assertEquals(ps, it.next());		
+	}
+
+	@Test
+	public void testGetContenutoPerNome_Minimale() {
+		Attrezzo att1 = new Attrezzo("b", 0);
+		Attrezzo att2 = new Attrezzo("d", 0);
+		Attrezzo att3 = new Attrezzo("a", 0);
+		Attrezzo att4 = new Attrezzo("c", 0);
+		prova.addAttrezzo(att1);
+		prova.addAttrezzo(att2);
+		prova.addAttrezzo(att3);
+		prova.addAttrezzo(att4);
+		SortedSet<Attrezzo> ordinato= prova.getContenutoOrdinatoPerNome();
+		assertFalse(ordinato.isEmpty());
+		Iterator<Attrezzo> it = ordinato.iterator();
+		assertEquals(att3, it.next());
+		assertEquals(att1, it.next());
+		assertEquals(att4, it.next());
+		assertEquals(att2, it.next());
 	}
 	
 }

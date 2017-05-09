@@ -62,7 +62,7 @@ public class Attrezzo {
 	
 	@Override
 	public int hashCode() {
-		return 0;
+		return this.getNome().hashCode() + this.getPeso();
 	}
 	
 	

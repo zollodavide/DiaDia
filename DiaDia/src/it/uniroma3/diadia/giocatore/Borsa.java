@@ -2,6 +2,8 @@ package it.uniroma3.diadia.giocatore;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -27,25 +29,46 @@ public class Borsa {
 	private int pesoMax;
 	
 	
+	/**
+	 * Classe utilizzata per ordinare gli elementi di una collezione per peso
+	 * 
+	 * @author Davide Zollo
+	 * 
+	 */
 	private class ComparatorePerPeso implements Comparator<Attrezzo> {
 
 		@Override
 		public int compare(Attrezzo o1, Attrezzo o2) {
-			return o1.getPeso() - o2.getPeso();
+			int ord = o1.getPeso() - o2.getPeso();
+			if (ord==0)
+				return o1.getNome().compareTo(o2.getNome());
+			else
+				return ord;
 		}
 		
 	}
 	
-	// NON ANCORA IMPLEMENTATO
-	/*
+	
+	/**
+	 * Classe utilizzata per ordinare gli elementi di una collezione per nome
+	 * 
+	 * @author Davide Zollo
+	 *
+	 */
 	private class ComparatorePerNome implements Comparator<Attrezzo> {
 
 		@Override
 		public int compare(Attrezzo o1, Attrezzo o2) {
-			return o1.getNome().compareTo(o2.getNome());
+			
+			int ord = o1.getNome().compareTo(o2.getNome());
+			
+			if (ord == 0)
+				return o2.getPeso() - o1.getPeso();
+			else
+				return ord;
 		}
 		
-	}*/
+	}
 
 
 	/**
@@ -278,18 +301,32 @@ public class Borsa {
 	}
 	
 	
+	/**
+	 * Metodo che crea una nuova lista con gli attrezzi presenti nella borsa,
+	 * la ordina per peso e poi la restituisce.
+	 * 
+	 * @return lista con gli attrezzi della borsa ordinati per peso
+	 */
 	public List<Attrezzo> getContenutoOrdinatoPerPeso() {
-		List<Attrezzo> ordinata = new ArrayList<Attrezzo>();
-		ordinata.addAll(this.attrezzi);
+		List<Attrezzo> ordinata = new ArrayList<Attrezzo>(this.attrezzi);
 		Collections.sort(ordinata, new ComparatorePerPeso());
 		
 		return ordinata; 
 	}
 	
 	
-	/*public SortedSet<Attrezzo> getContenutoOrdinatoPerNome() {
+	/**
+	 * Metodo che crea un nuovo insieme ordinato per nome con gli attrezzi presenti nella borsa,
+	 * lo restituisce.
+	 * 
+	 * @return insieme ordinato con gli attrezzi della borsa ordinati per nome
+	 */
+	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome() {
+		SortedSet<Attrezzo> ordinata = new TreeSet<>(new ComparatorePerNome());
+		ordinata.addAll(this.attrezzi);
 		
-	}*/
+		return ordinata;
+	}
 	
 	
 
