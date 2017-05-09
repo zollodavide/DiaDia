@@ -2,8 +2,10 @@ package it.uniroma.diadia.giocatore;
 
 import static org.junit.Assert.*;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.SortedSet;
 
 import org.junit.Before;
@@ -213,7 +215,6 @@ public class BorsaTest {
 	}
 	
 	
-	
 	@Test
 	public void testGetContenutoPerNome() {
 		Borsa prova2 = new Borsa(50);
@@ -252,5 +253,60 @@ public class BorsaTest {
 		assertEquals(att4, it.next());
 		assertEquals(att2, it.next());
 	}
+	
+	@Test
+	public void testGetSortedSetPerPeso() {
+		Borsa prova2 = new Borsa(30);
+		Attrezzo piombo = new Attrezzo("piombo", 10);
+		Attrezzo ps = new Attrezzo("ps", 5);
+		Attrezzo libro = new Attrezzo("libro", 5);
+		Attrezzo piuma = new Attrezzo("piuma", 1);
+		assertTrue(prova2.addAttrezzo(piombo));
+		assertTrue(prova2.addAttrezzo(ps));
+		assertTrue(prova2.addAttrezzo(libro));
+		assertTrue(prova2.addAttrezzo(piuma));
+		SortedSet<Attrezzo> ordinato= prova2.getSortedSetOrdinatoPerPeso();
+		assertFalse(ordinato.isEmpty());
+		Iterator<Attrezzo> it = ordinato.iterator();
+		assertEquals(piuma, it.next());
+		assertEquals(libro, it.next());
+		assertEquals(ps, it.next());
+		assertEquals(piombo, it.next());		
+	}
+	
+	@Test
+	public void testGetSortedSetPerPeso_Minimale() {
+		Attrezzo att1 = new Attrezzo("b", 4);
+		Attrezzo att2 = new Attrezzo("d", 2);
+		Attrezzo att3 = new Attrezzo("a", 3);
+		Attrezzo att4 = new Attrezzo("c", 1);
+		prova.addAttrezzo(att1);
+		prova.addAttrezzo(att2);
+		prova.addAttrezzo(att3);
+		prova.addAttrezzo(att4);
+		SortedSet<Attrezzo> ordinato= prova.getSortedSetOrdinatoPerPeso();
+		assertFalse(ordinato.isEmpty());
+		Iterator<Attrezzo> it = ordinato.iterator();
+		assertEquals(att4, it.next());
+		assertEquals(att2, it.next());
+		assertEquals(att3, it.next());
+		assertEquals(att1, it.next());
+	}
+	
+	/*
+	@Test
+	public void testGetContenutoRaggruppatoPerPeso() {
+		Borsa prova2 = new Borsa(50);
+		Attrezzo piombo = new Attrezzo("piombo", 10);
+		Attrezzo ps = new Attrezzo("ps", 5);
+		Attrezzo libro = new Attrezzo("libro", 5);
+		Attrezzo piuma = new Attrezzo("piuma", 1);
+		assertTrue(prova2.addAttrezzo(piombo));
+		assertTrue(prova2.addAttrezzo(ps));
+		assertTrue(prova2.addAttrezzo(libro));
+		assertTrue(prova2.addAttrezzo(piuma));
+		Set<Attrezzo> gruppo1 = new HashSet<Attrezzo>();
+		
+	}*/
 	
 }
