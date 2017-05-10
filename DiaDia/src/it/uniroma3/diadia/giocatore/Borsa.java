@@ -293,15 +293,15 @@ public class Borsa {
 		StringBuilder s = new StringBuilder();
 
 		if (!this.isEmpty()) {
-			s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg): ");
+			s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg):" + "\n");
 			
-			Collection<Attrezzo> coll = this.attrezzi.values();
-			
+			Collection<Attrezzo> coll = this.getSortedSetOrdinatoPerPeso();
+		
 			Iterator<Attrezzo> it = coll.iterator();
 			
 			while(it.hasNext()) {
 				Attrezzo n = it.next();
-				s.append(n.toString()+" ");
+				s.append("- " + n.toString()+"\n");
 			}
 			/*for (int i= 0; i<this.attrezzi.length; i++)
 				if(attrezzi[i]!=null)
@@ -355,20 +355,23 @@ public class Borsa {
 	}
 	
 	
-	
-	//////////////////////////////DA REVISIONARE E TESTARE
+	/**
+	 * Metodo che ritorna una mappa che associa attrezzi con lo stesso peso, utilizzando il peso come chiave.
+	 * 
+	 * @return map contenente attrezzi associati dallo stesso peso
+	 */
 	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso() {
-		Set<Attrezzo> set;
+		Set<Attrezzo> tmp;
 		Map<Integer,Set<Attrezzo>> mappa = new HashMap<>();
 		
 		for (Attrezzo att : this.attrezzi.values()) {
-			set = mappa.get(att.getPeso());
+			tmp = mappa.get(att.getPeso());
 			
-			if(set == null)
-				set = new HashSet<>();
+			if(tmp == null)
+				tmp = new HashSet<>();
 			
-			set.add(att);
-			mappa.put(att.getPeso(), set);
+			tmp.add(att);
+			mappa.put(att.getPeso(), tmp);
 			
 		}
 		

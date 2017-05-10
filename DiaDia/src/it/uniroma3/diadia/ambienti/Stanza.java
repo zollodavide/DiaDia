@@ -148,13 +148,12 @@ public class Stanza {
 		risultato.append("\nUscite: ");
 		
 		for (String direzione : this.stanzeAdiacenti.keySet())
-			if (direzione!=null)
-				risultato.append(" " + direzione);
-		risultato.append("\nAttrezzi nella stanza: ");
+			risultato.append(" " + direzione);
+		risultato.append("\n\nAttrezzi nella stanza:" + "\n");
 		Collection<Attrezzo> coll = this.attrezzi.values();
 		
 		for (Attrezzo attrezzo : coll) 
-			risultato.append(attrezzo.toString()+" ");
+			risultato.append("- " + attrezzo.toString()+"\n");
 		
 		return risultato.toString();
 	}

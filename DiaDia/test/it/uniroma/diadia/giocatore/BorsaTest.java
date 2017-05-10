@@ -1,10 +1,15 @@
 package it.uniroma.diadia.giocatore;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 
@@ -216,7 +221,7 @@ public class BorsaTest {
 	
 	
 	@Test
-	public void testGetContenutoPerNome() {
+	public void testGetContenutoPerNome2() {
 		Borsa prova2 = new Borsa(50);
 		Attrezzo piombo = new Attrezzo("piombo", 10);
 		Attrezzo ps = new Attrezzo("ps", 5);
@@ -236,7 +241,7 @@ public class BorsaTest {
 	}
 
 	@Test
-	public void testGetContenutoPerNome_Minimale() {
+	public void testGetContenutoPerNome() {
 		Attrezzo att1 = new Attrezzo("b", 0);
 		Attrezzo att2 = new Attrezzo("d", 0);
 		Attrezzo att3 = new Attrezzo("a", 0);
@@ -255,7 +260,7 @@ public class BorsaTest {
 	}
 	
 	@Test
-	public void testGetSortedSetPerPeso() {
+	public void testGetSortedSetPerPeso2() {
 		Borsa prova2 = new Borsa(30);
 		Attrezzo piombo = new Attrezzo("piombo", 10);
 		Attrezzo ps = new Attrezzo("ps", 5);
@@ -275,7 +280,7 @@ public class BorsaTest {
 	}
 	
 	@Test
-	public void testGetSortedSetPerPeso_Minimale() {
+	public void testGetSortedSetPerPeso() {
 		Attrezzo att1 = new Attrezzo("b", 4);
 		Attrezzo att2 = new Attrezzo("d", 2);
 		Attrezzo att3 = new Attrezzo("a", 3);
@@ -293,7 +298,48 @@ public class BorsaTest {
 		assertEquals(att1, it.next());
 	}
 	
-	/*
+	@Test
+	public void testListaOrdinataPerPesoConPesoUguale() {
+		prova.addAttrezzo(new Attrezzo("secondo", 1));
+		prova.addAttrezzo(new Attrezzo("primo", 1));
+		List<Attrezzo> doubleton = prova.getContenutoOrdinatoPerPeso();
+		assertEquals(new Attrezzo("primo", 1), doubleton.get(0));
+		assertEquals(new Attrezzo("secondo", 1), doubleton.get(1));
+	}
+	
+	@Test
+	public void testSetOrdinatoPerNomeConNomiQuasiUguali() {
+		prova.addAttrezzo(new Attrezzo("abcd", 1));
+		prova.addAttrezzo(new Attrezzo("abc", 1));
+		SortedSet<Attrezzo> doubleton = prova.getContenutoOrdinatoPerNome();
+		Iterator<Attrezzo> it = doubleton.iterator();
+		assertEquals(new Attrezzo("abc", 1), it.next());
+		assertEquals(new Attrezzo("abcd", 1), it.next());
+	}
+	
+	@Test
+	public void testSetOrdinatoPerPesoConPesoUguale() {
+		prova.addAttrezzo(new Attrezzo("secondo", 1));
+		prova.addAttrezzo(new Attrezzo("primo", 1));
+		SortedSet<Attrezzo> doubleton = prova.getSortedSetOrdinatoPerPeso();
+		Iterator<Attrezzo> it = doubleton.iterator();
+		assertEquals(new Attrezzo("primo", 1), it.next());
+		assertEquals(new Attrezzo("secondo", 1), it.next());
+	}
+	
+	@Test
+	public void testListaOrdinataPerPesoVuota() {
+		List<Attrezzo> vuota = prova.getContenutoOrdinatoPerPeso();
+		assertNotNull(vuota);
+	}
+	
+	@Test
+	public void testSetOrdinatoPerPesoVuota() {
+		SortedSet<Attrezzo> vuota = prova.getSortedSetOrdinatoPerPeso();
+		assertNotNull(vuota);
+	}
+	
+	
 	@Test
 	public void testGetContenutoRaggruppatoPerPeso() {
 		Borsa prova2 = new Borsa(50);
@@ -305,8 +351,17 @@ public class BorsaTest {
 		assertTrue(prova2.addAttrezzo(ps));
 		assertTrue(prova2.addAttrezzo(libro));
 		assertTrue(prova2.addAttrezzo(piuma));
-		Set<Attrezzo> gruppo1 = new HashSet<Attrezzo>();
-		
-	}*/
+		Set<Attrezzo> gruppo1 = new HashSet<>();
+		gruppo1.add(libro);
+		gruppo1.add(ps);
+		Set<Attrezzo> gruppo2 = new HashSet<>();
+		gruppo2.add(piombo);
+		Set<Attrezzo> gruppo3 = new HashSet<>();
+		gruppo3.add(piuma);
+		Map<Integer, Set<Attrezzo>> map = prova2.getContenutoRaggruppatoPerPeso();
+		assertEquals(gruppo1, map.get(5));
+		assertEquals(gruppo2, map.get(10));
+		assertEquals(gruppo3, map.get(1));		
+	}
 	
 }
