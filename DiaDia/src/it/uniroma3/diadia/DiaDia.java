@@ -6,7 +6,6 @@ import java.util.Scanner;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.*;
-import it.uniroma3.diadia.comandi.ComandoVecchio;
  
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.

@@ -4,8 +4,8 @@ import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
- * Cerca di posare un oggetto contenuto nella borsa, nel caso in cui l'attrezzo
- * non può essere posato o non esiste, stampa un messaggio di errore
+ * Classe che rappresenta un comando che cerca di posare un oggetto contenuto nella borsa, nel caso in cui l'attrezzo
+ * non puï¿½ essere posato o non esiste, stampa un messaggio di errore
  * 
  */
 public class ComandoPosa implements Comando {
@@ -24,7 +24,7 @@ public class ComandoPosa implements Comando {
 			System.out.println("Che attrezzo vuoi posare?");
 		
 		else if(!partita.getGiocatore().getBorsa().hasAttrezzo(attrezzoDaPosare))
-			System.out.println("L'attrezzo " + attrezzoDaPosare + " non è presente nella borsa");
+			System.out.println("L'attrezzo " + attrezzoDaPosare + " non ï¿½ presente nella borsa");
 			
 		else {
 			
@@ -32,7 +32,7 @@ public class ComandoPosa implements Comando {
 					
 			if(partita.getStanzaCorrente().addAttrezzo(attrezzo)){
 				partita.getGiocatore().getBorsa().removeAttrezzo(attrezzoDaPosare);
-				System.out.println("L'attrezzo " + attrezzoDaPosare + " è stato posato nella stanza!");
+				System.out.println("L'attrezzo " + attrezzoDaPosare + " ï¿½ stato posato nella stanza!");
 			}
 
 		}	

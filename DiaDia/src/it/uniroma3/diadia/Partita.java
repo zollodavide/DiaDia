@@ -88,6 +88,11 @@ public class Partita {
 		return this.labirinto;
 	}
 	
+	/**
+	 * Controlla se il giocatore ha ancora dei CFU disponibili
+	 * 
+	 * @return true se i cfu sono maggiori di 0
+	 */
 	public boolean giocatoreIsVivo() {
 		return this.giocatore.getCfu()>0;
 	}

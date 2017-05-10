@@ -2,8 +2,20 @@ package it.uniroma3.diadia.comandi;
 
 import java.util.Scanner;
 
+/**
+ * Classe che prendendo i dati da input si occupa di costruire l'opportuno comando.
+ * 
+ * @author Davide Zollo
+ * 
+ */
 public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi{
 
+	/**
+	 * Factory method che restituisce l'opportuno comando data una string in input.
+	 * 
+	 * @param stringa contente l'informazione (comando e parametro)
+	 * @return l'opportuno comando
+	 */
 	public Comando costruisciComando(String istruzione) {
 		
 		if(istruzione == null)

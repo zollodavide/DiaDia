@@ -2,6 +2,15 @@ package it.uniroma3.diadia.ambienti;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
+/**
+ * Stanza che dopo aver posato attrezzi un tot numero di volte (soglia), questa modifica il nome dell'attrezzo
+ * e ne raddoppia il peso.
+ * 
+ * @author Davide Zollo
+ * @see Stanza
+ *
+ */
+
 public class StanzaMagica extends Stanza {
 
 	final static int SOGLIA_MAGICA_DEFAULT = 3;
@@ -30,7 +39,12 @@ public class StanzaMagica extends Stanza {
 		return super.addAttrezzo(attrezzo);
 	}
 
-
+	/**
+	 * Metodo che inverte il nome dell'attrezzo posato e ne raddoppia il peso
+	 * 
+	 * @param l'attrezzo posato
+	 * @return l'attrezzo con nome invertito e peso doppio
+	 */
 	private Attrezzo modificaAttrezzo(Attrezzo attrezzo) {
 
 		StringBuilder nomeInvertito;

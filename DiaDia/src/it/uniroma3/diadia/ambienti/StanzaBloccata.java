@@ -1,5 +1,14 @@
 package it.uniroma3.diadia.ambienti;
 
+/**
+ * Classe che rappresenta una stanza bloccata del gioco. Questa può essere sbloccata solo quando c'è 
+ * l'attrezzo sbloccante nella stanza adiacente.
+ * 
+ * @author Davide Zollo
+ * @see Stanza
+ *
+ */
+
 public class StanzaBloccata extends Stanza {
 	
 	private String attrezzoSbloccante;
@@ -23,10 +32,18 @@ public class StanzaBloccata extends Stanza {
 		}
 	}
 	
+	/**
+	 * Restituisce la stringa del nome dell'attrezzo sbloccante
+	 * @return la stringa del nome dell'attrezzo sbloccante
+	 */
 	public String getAttrezzoSbloccante() {
 		return this.attrezzoSbloccante;
 	}
 	
+	/**
+	 * Restituisce la stringa del nome della direzione bloccata
+	 * @return la stringa del nome della direzione bloccata
+	 */
 	public String getDirezioneBloccata() {
 		return this.direzioneBloccata;
 	}

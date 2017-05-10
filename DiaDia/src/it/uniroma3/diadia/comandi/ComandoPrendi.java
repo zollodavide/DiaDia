@@ -4,7 +4,7 @@ import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
- * Cerca di prendere un oggetto se presente nella stanza, nel caso in cui non c'è
+ * Classe che rappresenta un comando che cerca di prendere un oggetto se presente nella stanza, nel caso in cui non c'ï¿½
  * stampa un messaggio di errore
  * 
  */
@@ -24,7 +24,7 @@ public class ComandoPrendi implements Comando {
 			System.out.println("Che attrezzo vuoi prendere?");
 
 		else if(!partita.getStanzaCorrente().hasAttrezzo(attrezzoDaPrendere))
-			System.out.println("L'attrezzo " + attrezzoDaPrendere + " non è presente nella stanza");
+			System.out.println("L'attrezzo " + attrezzoDaPrendere + " non ï¿½ presente nella stanza");
 
 		else {
 			Attrezzo attrezzo = partita.getStanzaCorrente().getAttrezzo(attrezzoDaPrendere);
@@ -37,7 +37,7 @@ public class ComandoPrendi implements Comando {
 			
 			else if(partita.getGiocatore().getBorsa().addAttrezzo(attrezzo)) {
 				partita.getStanzaCorrente().removeAttrezzo(attrezzo);
-				System.out.println("attrezzo " + attrezzoDaPrendere + " è stato preso!");
+				System.out.println("attrezzo " + attrezzoDaPrendere + " ï¿½ stato preso!");
 			}
 		}
 	}

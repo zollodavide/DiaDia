@@ -3,9 +3,8 @@ package it.uniroma3.diadia.comandi;
 import it.uniroma3.diadia.Partita;
 
 /**
- * Stampa informazioni di aiuto.
+ * Classe che rappresenta il comando che stampa informazioni di aiuto.
  */
-
 public class ComandoAiuto implements Comando {
 	
 	private final String nomeComando;
@@ -28,6 +27,7 @@ public class ComandoAiuto implements Comando {
 		return nomeComando;
 	}
 	
+	@Override
 	public String getParametro() {
 		return null;
 	}
