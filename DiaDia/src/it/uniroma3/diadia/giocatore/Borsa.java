@@ -29,8 +29,6 @@ public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
 
 	private Map<String, Attrezzo> attrezzi;
-	//private Attrezzo[] attrezzi;
-	//private int numeroAttrezzi;
 	private int pesoMax;
 	
 	
@@ -95,8 +93,6 @@ public class Borsa {
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
 		this.attrezzi = new HashMap<String, Attrezzo>();
-		//this.numeroAttrezzi = 0;
-
 	}
 
 	/**
@@ -125,20 +121,6 @@ public class Borsa {
 		else
 			return false;
 
-		/*else if (this.numeroAttrezzi==10) ///////////////////DA MODIFICARE
-			return false;*/
-
-	
-
-				/*for(int i =0; i<this.attrezzi.length; i++) {
-				if(this.attrezzi[i]==null) {
-					this.attrezzi[i] = attrezzo;
-					this.numeroAttrezzi++;
-					return true; 
-				}	
-			}	*/	
-				 	//Se c'� qualche tipo di problema al momento di aggiungere un oggetto ritorna false
-		
 	}
 
 	/**
@@ -180,26 +162,6 @@ public class Borsa {
 	 */
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		return this.attrezzi.get(nomeAttrezzo);
-
-		/*Iterator<Attrezzo> it = this.attrezzi.iterator();
-
-		boolean trovato = false;
-
-		while(it.hasNext() && !trovato) {
-			Attrezzo cercato = it.next();
-			if(cercato.getNome().equals(nomeAttrezzo)) {
-				a = cercato;
-				trovato = true;
-			}
-		}*/				
-
-
-		/*for (int i= 0; i<this.attrezzi.length; i++)
-			if (this.attrezzi[i]!=null && this.attrezzi[i].getNome().equals(nomeAttrezzo))
-					a = attrezzi[i];
-		 */
-
-
 	}
 
 
@@ -243,34 +205,6 @@ public class Borsa {
 		
 		else
 			return this.attrezzi.remove(nomeAttrezzo);
-		
-		/*
-		boolean rimosso = false;
-		Iterator<Attrezzo> it = this.attrezzi.iterator();
-		
-		while(it.hasNext() && !rimosso) {
-			Attrezzo cercato = it.next();
-	
-			if(cercato.getNome().equals(nomeAttrezzo)) {
-				a = cercato;
-				it.remove();
-				rimosso = true;
-				
-			}
-		}*/
-
-		/*while(i<this.attrezzi.length && !rimosso) {
-			if(this.attrezzi[i]!=null && this.attrezzi[i].getNome().equals(nomeAttrezzo)) {
-				a = this.attrezzi[i];
-				this.attrezzi[i] = null;
-				this.numeroAttrezzi--;
-				rimosso = true;
-			}
-			else
-				i++;
-
-		}*/
-
 	}
 
 	/** 
@@ -303,10 +237,8 @@ public class Borsa {
 				Attrezzo n = it.next();
 				s.append("- " + n.toString()+"\n");
 			}
-			/*for (int i= 0; i<this.attrezzi.length; i++)
-				if(attrezzi[i]!=null)
-					s.append(attrezzi[i].toString()+" "); */
 		}
+		
 		else
 			s.append("Borsa vuota");
 

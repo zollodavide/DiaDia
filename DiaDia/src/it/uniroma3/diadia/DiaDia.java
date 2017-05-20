@@ -3,8 +3,6 @@ package it.uniroma3.diadia;
 
 import java.util.Scanner;
 
-import it.uniroma3.diadia.ambienti.Stanza;
-import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.*;
  
 /**
@@ -64,36 +62,6 @@ public class DiaDia {
 		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
 		daEseguire = factory.costruisciComando(istruzione);
 		daEseguire.esegui(this.partita);
-
-
-		/*if(istruzione.equals("") || istruzione.isEmpty())
-			System.out.println("Inserisci un comando valido");
-
-		else { //////////////////////FABBRICACOMANDI
-
-			ComandoVecchio comandoDaEseguire = new ComandoVecchio(istruzione);
-
-			if(comandoDaEseguire.getNome()==(null)) {
-				System.out.println("Inserisci un comando");
-				return false;
-			}
-
-			else if (comandoDaEseguire.getNome().equals("fine")) {
-				this.fine(); 
-				return true;
-			}
-
-			else if (comandoDaEseguire.getNome().equals("vai"))
-				this.vai(comandoDaEseguire.getParametro());
-			else if (comandoDaEseguire.getNome().equals("aiuto"))
-				this.aiuto();
-			else if (comandoDaEseguire.getNome().equals("prendi"))
-				this.prendi(comandoDaEseguire.getParametro());
-			else if (comandoDaEseguire.getNome().equals("posa"))
-				this.posa(comandoDaEseguire.getParametro());
-			else 
-				System.out.println("Comando sconosciuto");
-		}*/
 
 		if (this.partita.vinta()) 
 			System.out.println("Hai vinto!");
