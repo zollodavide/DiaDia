@@ -18,7 +18,7 @@ public class ComandoVaiTest {
 		corrente.setStanzaCorrente(stanzaCorr);
 		stanzaCorr.impostaStanzaAdiacente("nord", adiacente);
 		
-		Comando vai = new ComandoVai();
+		AbstractComando vai = new ComandoVai();
 		vai.setParametro("nord");
 		vai.esegui(corrente);
 		assertSame(adiacente ,corrente.getStanzaCorrente());

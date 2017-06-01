@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.giocatore;
 
+import static it.uniroma3.diadia.properties.Costanti.DEFAULT_PESO_MAX_BORSA;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,6 @@ import java.util.HashSet;
  */
 public class Borsa {
 
-	public final static int DEFAULT_PESO_MAX_BORSA = 10;
 
 	private Map<String, Attrezzo> attrezzi;
 	private int pesoMax;
@@ -79,7 +79,7 @@ public class Borsa {
 	 *  
 	 */
 	public Borsa() {
-		this(DEFAULT_PESO_MAX_BORSA);
+		this(DEFAULT_PESO_MAX_BORSA.getCostant());
 	}
 
 	/**
@@ -112,8 +112,11 @@ public class Borsa {
 		else if(attrezzo.getNome().equals(""))
 			return false;
 
-		else if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
+		else if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax()) {
+			System.out.println("Hai la borsa piena!");
 			return false;
+			
+		}
 		
 		else if(this.attrezzi.put(attrezzo.getNome(),attrezzo)==null)
 			return true;

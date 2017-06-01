@@ -114,6 +114,14 @@ public class Stanza {
 		for (Attrezzo attrezzo : coll) 
 			risultato.append("- " + attrezzo.toString()+"\n");
 		
+		risultato.append("\n");
+	
+		if(this.hasPersonaggio())
+			risultato.append("Nella stanza è presente: " + this.getPersonaggio().toString());
+		else
+			risultato.append("Nella stanza non è presente nessuno");
+		
+		
 		return risultato.toString();
 	}
 
@@ -184,6 +192,10 @@ public class Stanza {
 	
 	public AbstractPersonaggio getPersonaggio() {
 		return this.personaggio;
+	}
+	
+	public boolean hasPersonaggio() {
+		return this.getPersonaggio()!=null;
 	}
 
 	

@@ -1,13 +1,13 @@
 package it.uniroma3.diadia.comandi;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.giocatore.Borsa;
 
 public class ComandoPrendiTest {
 
@@ -25,7 +25,7 @@ public class ComandoPrendiTest {
 		
 		assertTrue(stanzaCorr.hasAttrezzo("unitario"));
 		
-		Comando prendi = new ComandoPrendi();
+		AbstractComando prendi = new ComandoPrendi();
 		prendi.setParametro("unitario");
 		prendi.esegui(corrente);
 		

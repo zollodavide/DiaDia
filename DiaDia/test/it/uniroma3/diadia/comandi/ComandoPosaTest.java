@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.comandi;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -23,7 +24,7 @@ public class ComandoPosaTest {
 				
 		assertFalse(corrente.getStanzaCorrente().hasAttrezzo("unitario"));
 
-		Comando posa = new ComandoPosa();
+		AbstractComando posa = new ComandoPosa();
 		posa.setParametro("unitario");
 		posa.esegui(corrente);
 		

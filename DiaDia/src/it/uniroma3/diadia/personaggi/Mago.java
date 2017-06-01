@@ -1,29 +1,29 @@
 package it.uniroma3.diadia.personaggi;
 
+import static it.uniroma3.diadia.properties.Properties.MESSAGGIO_DIMEZZA;
+import static it.uniroma3.diadia.properties.Properties.MESSAGGIO_DONO;
+import static it.uniroma3.diadia.properties.Properties.MESSAGGIO_SCUSE;
+
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
+
+
 public class Mago extends AbstractPersonaggio {
 
-	private static final String MESSAGGIO_DONO = "Sei un vero simpaticone, " +
-			"con una mia magica azione, troverai un nuovo oggetto " +
-			"per il tuo borsone!";
-
-	private static final String MESSAGGIO_SCUSE = "Mi spiace, ma non ho piu' nulla...";
-	
-	private Attrezzo attrezzo;
+	private Attrezzo dono;
 	
 	public Mago(String nome, String presentazione, Attrezzo attrezzo) {
 		super(nome, presentazione);
-		this.attrezzo = attrezzo;
+		this.dono = attrezzo;
 	}
 	
 	@Override
 	public String agisci(Partita partita) {
 		String msg;
-		if (attrezzo!=null) {
-			partita.getStanzaCorrente().addAttrezzo(attrezzo);
-			this.attrezzo = null;
+		if (dono!=null) {
+			partita.getStanzaCorrente().addAttrezzo(dono);
+			this.dono = null;
 			msg = MESSAGGIO_DONO;
 		}
 		else {
@@ -34,7 +34,10 @@ public class Mago extends AbstractPersonaggio {
 
 	@Override
 	public String riceviRegalo(Attrezzo regalo, Partita partita) {
-		return null;
+		partita.getGiocatore().getBorsa().removeAttrezzo(regalo.getNome());	
+		Attrezzo half = new Attrezzo(regalo.getNome(), regalo.getPeso()/2);
+		partita.getStanzaCorrente().addAttrezzo(half);	
+		return MESSAGGIO_DIMEZZA;
 	}
 
 }

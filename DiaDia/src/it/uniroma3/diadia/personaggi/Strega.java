@@ -1,6 +1,11 @@
 package it.uniroma3.diadia.personaggi;
 
+import static it.uniroma3.diadia.properties.Properties.MESSAGGIO_EDUCATO;
+import static it.uniroma3.diadia.properties.Properties.MESSAGGIO_MALEDUCATO;
+import static it.uniroma3.diadia.properties.Properties.MESSAGGIO_RISATA;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -10,10 +15,6 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Strega extends AbstractPersonaggio {
 	
-	private static final String MESSAGGIO_EDUCATO = "Visto che mi hai salutato, ti porterò a un luogo pieno di ricchezza!!";
-
-	private static final String MESSAGGIO_MALEDUCATO = "Visto che sei un maleducato e non saluti ti"
-													 + " porterò in un luogo pieno di povertà!!";
 
 	public Strega(String nome, String presentaz) {
 		super(nome, presentaz);
@@ -28,17 +29,15 @@ public class Strega extends AbstractPersonaggio {
 			Stanza tmp = partita.getStanzaCorrente().getStanzaAdiacente(dir);
 			list.add(tmp);
 		}
-		
-		list.sort(new ComparatorePerNumAttrezzi());
-		
+				
 		if(super.haSalutato()) {
 			msg = MESSAGGIO_EDUCATO;
-			partita.setStanzaCorrente(list.get(list.size()-1));
+			partita.setStanzaCorrente(Collections.max(list, new ComparatorePerNumAttrezzi()));
 		}
 		
 		else {
 			msg = MESSAGGIO_MALEDUCATO;
-			partita.setStanzaCorrente(list.get(0));
+			partita.setStanzaCorrente(Collections.min(list, new ComparatorePerNumAttrezzi()));
 		}
 		
 		return msg;
@@ -60,8 +59,8 @@ public class Strega extends AbstractPersonaggio {
 
 	@Override
 	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
-		// TODO Auto-generated method stub
-		return null;
+		partita.getGiocatore().getBorsa().removeAttrezzo(attrezzo.getNome());
+		return MESSAGGIO_RISATA;
 	}
 
 }

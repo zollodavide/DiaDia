@@ -7,6 +7,6 @@ public interface FabbricaDiComandi {
 	 * @param l'istruzione corrente
 	 * @return il comando costruito
 	 */
-	public Comando costruisciComando(String istruzione);	
+	public AbstractComando costruisciComando(String istruzione);	
 }
 

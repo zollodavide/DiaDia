@@ -1,5 +1,9 @@
 package it.uniroma3.diadia.personaggi;
 
+import static  it.uniroma3.diadia.properties.Properties.MESSAGGIO_MORSO;
+import static  it.uniroma3.diadia.properties.Properties.MESSAGGIO_REGALOGRADITO;
+import static  it.uniroma3.diadia.properties.Properties.MESSAGGIO_REGALONONGRADITO;
+
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -7,11 +11,6 @@ public class Cane extends AbstractPersonaggio {
 	
 	String ciboPreferito;
 
-	private static final String MESSAGGIO_MORSO = "Il cane ti ha morso i cfu!";
-	private static final String MESSAGGIO_REGALOGRADITO = "Wuf Wuf! (Il cane salta e sembra felice del tuo regalo)";
-	private static final String MESSAGGIO_REGALONONGRADITO= "Grrrr! (Il cane sembra non gradire il tuo regalo)";
-
-			
 	public Cane(String nome, String presentaz, String ciboPreferito) {
 		super(nome, presentaz);
 		this.ciboPreferito = ciboPreferito;

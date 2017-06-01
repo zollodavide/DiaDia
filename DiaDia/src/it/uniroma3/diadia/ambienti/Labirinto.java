@@ -1,10 +1,12 @@
 package it.uniroma3.diadia.ambienti;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
+import it.uniroma3.diadia.personaggi.Mago;
 
 /**
- * Questa classe ha la responsabilità di creare il labirinto del gioco,
- * cioè di creare e collegare tutte le stanze. Inoltre, memorizza la stanza
+ * Questa classe ha la responsabilitï¿½ di creare il labirinto del gioco,
+ * cioï¿½ di creare e collegare tutte le stanze. Inoltre, memorizza la stanza
  * vincente e quella iniziale.
  * 
  * @author Davide Zollo & Fabio Ramohitaj
@@ -53,6 +55,9 @@ public class Labirinto {
 		Stanza aulaDs2 = new Stanza("Aula DS2");
 		Stanza macchinette = new Stanza("Macchinette");
 		Stanza capannoni = new Stanza("Capannoni");
+		
+		/* crea i personaggi */
+		AbstractPersonaggio mago = new Mago("Mago Merlino", "", lanterna);
 
 		
 		/* collega le stanze */
@@ -96,10 +101,12 @@ public class Labirinto {
 		biblioteca.impostaStanzaAdiacente("ovest", macchinette);
 
         /* pone gli attrezzi nelle stanze */
-		aulaN10.addAttrezzo(lanterna);
 		atrio.addAttrezzo(osso);
 		atrio.addAttrezzo(tazza);
 		atrio.addAttrezzo(spada);
+		
+		/* settaggio dei personaggi nelle stanze */
+		atrio.setPersonaggio(mago);
 
 		/* il gioco comincia nell'atrio */
        entrata = atrio;  

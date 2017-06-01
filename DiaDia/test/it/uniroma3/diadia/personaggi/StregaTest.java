@@ -1,6 +1,8 @@
 package it.uniroma3.diadia.personaggi;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -64,5 +66,13 @@ public class StregaTest {
 		assertSame(corrente, partita.getStanzaCorrente());
 		strega.agisci(partita);
 		assertSame(stanzaConMenoAttrezzi, partita.getStanzaCorrente());
+	}
+	
+	@Test
+	public void testRegalo() {
+		Attrezzo singleton = new Attrezzo("singleton", 1);
+		partita.getGiocatore().getBorsa().addAttrezzo(singleton);
+		strega.riceviRegalo(singleton, partita);
+		assertFalse(partita.getGiocatore().getBorsa().hasAttrezzo(singleton.getNome()));
 	}
 }

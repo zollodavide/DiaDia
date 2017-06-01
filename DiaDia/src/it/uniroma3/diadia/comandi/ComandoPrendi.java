@@ -8,37 +8,38 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * stampa un messaggio di errore
  * 
  */
-public class ComandoPrendi implements Comando {
+public class ComandoPrendi extends AbstractComando {
 	
-	private final String nomeComando;
 	private String attrezzoDaPrendere;
 	
 	public ComandoPrendi() {
-		this.nomeComando = "prendi";
+		super("prendi");
 	}
 
 	@Override
-	public void esegui(Partita partita) {
+	public String esegui(Partita partita) {
 
 		if(attrezzoDaPrendere==null) 
-			System.out.println("Che attrezzo vuoi prendere?");
+			return ("Che attrezzo vuoi prendere?");
 
 		else if(!partita.getStanzaCorrente().hasAttrezzo(attrezzoDaPrendere))
-			System.out.println("L'attrezzo " + attrezzoDaPrendere + " non � presente nella stanza");
+			return ("L'attrezzo " + attrezzoDaPrendere + " non � presente nella stanza");
 
 		else {
 			Attrezzo attrezzo = partita.getStanzaCorrente().getAttrezzo(attrezzoDaPrendere);
 			
 			if(partita.getGiocatore().getBorsa().getPeso()>=partita.getGiocatore().getBorsa().getPesoMax())
-				System.out.println("Hai la borsa piena!");
+				return ("Hai la borsa piena!");
 			
 			else if(partita.getGiocatore().getBorsa().getPeso() + attrezzo.getPeso() > partita.getGiocatore().getBorsa().getPesoMax())
-				System.out.println("L'attrezzo pesa troppo!");
+				return ("L'attrezzo pesa troppo!");
 			
 			else if(partita.getGiocatore().getBorsa().addAttrezzo(attrezzo)) {
 				partita.getStanzaCorrente().removeAttrezzo(attrezzo);
-				System.out.println("attrezzo " + attrezzoDaPrendere + " � stato preso!");
+				return ("attrezzo " + attrezzoDaPrendere + " � stato preso!");
 			}
+			else 
+				return ("L'attrezzo non è stato preso");
 		}
 	}
 	
@@ -51,28 +52,10 @@ public class ComandoPrendi implements Comando {
 		this.attrezzoDaPrendere = nomeAttrezzo;
 	}
 	
-	
-	@Override
-	public String getNomeComando() {
-		return this.nomeComando;
-	}
-
 
 	@Override
 	public String getParametro() {
 		return this.attrezzoDaPrendere;
-	}
-
-
-	@Override
-	public boolean equals(Object o) {
-		ComandoPrendi that = (ComandoPrendi)o;
-		return this.nomeComando.equals(that.getNomeComando()) && this.attrezzoDaPrendere.equals(that.getParametro());
-	}
-	
-	@Override
-	public int hashCode() {
-		return 0;
 	}
 
 }

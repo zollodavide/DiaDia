@@ -1,9 +1,11 @@
 package it.uniroma3.diadia;
 
 
-import java.util.Scanner;
+import static it.uniroma3.diadia.properties.Properties.MESSAGGIO_BENVENUTO;
 
-import it.uniroma3.diadia.comandi.*;
+import it.uniroma3.diadia.comandi.AbstractComando;
+import it.uniroma3.diadia.comandi.FabbricaDiComandi;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
  
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -19,20 +21,12 @@ import it.uniroma3.diadia.comandi.*;
 
 public class DiaDia {
 
-	static final private String MESSAGGIO_BENVENUTO = ""+
-			"Ti trovi nell'Universita', ma oggi e' diversa dal solito...\n" +
-			"Meglio andare al piu' presto in biblioteca a studiare. Ma dov'e'?\n"+
-			"I locali sono popolati da strani personaggi, " +
-			"alcuni amici, altri... chissa!\n"+
-			"Ci sono attrezzi che potrebbero servirti nell'impresa:\n"+
-			"puoi raccoglierli, usarli, posarli quando ti sembrano inutili\n" +
-			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
-			"Per conoscere le istruzioni usa il comando 'aiuto'.";
-
 	private Partita partita;
-
+	private InterfacciaUtente interfaccia;
+	
 	public DiaDia() {
 		this.partita = new Partita();
+		this.interfaccia = new InterfacciaUtenteConsole();
 	}
 
 	/**
@@ -40,16 +34,23 @@ public class DiaDia {
 	 */
 	public void gioca() {
 		String istruzione; 
-		Scanner scannerDiLinee;
-
-		System.out.println(MESSAGGIO_BENVENUTO);
-		scannerDiLinee = new Scanner(System.in);		
+		
+		this.getInterfaccia().mostraMessaggio(MESSAGGIO_BENVENUTO);
 		do		
-			istruzione = scannerDiLinee.nextLine();
+			istruzione = this.getInterfaccia().prendiIstruzione();
+		
 		while (!processaIstruzione(istruzione) && !this.partita.isFinita());
 
 	}   
 
+
+	public Partita getPartita() {
+		return partita;
+	}
+
+	public InterfacciaUtente getInterfaccia() {
+		return this.interfaccia;
+	}
 
 	/**
 	 * Processa una istruzione 
@@ -58,16 +59,16 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione) {
 
-		Comando daEseguire;
+		AbstractComando daEseguire;
 		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
 		daEseguire = factory.costruisciComando(istruzione);
-		daEseguire.esegui(this.partita);
+		this.getInterfaccia().mostraMessaggio(daEseguire.esegui(this.partita));
 
 		if (this.partita.vinta()) 
-			System.out.println("Hai vinto!");
+			this.getInterfaccia().mostraMessaggio("Hai vinto!");
 		
 		if(!this.partita.giocatoreIsVivo() && !this.partita.vinta())
-			System.out.println("Hai finito i cfu, hai perso!");
+			this.getInterfaccia().mostraMessaggio("Hai finito i cfu, hai perso!");
 
 		return this.partita.isFinita();
 	}   

@@ -8,44 +8,21 @@ import it.uniroma3.diadia.Partita;
  * @author Davide Zollo
  *
  */
-public class ComandoGuarda implements Comando {
+public class ComandoGuarda extends AbstractComando {
 
-	private final String nomeComando;
 	
 	public ComandoGuarda() {
-		this.nomeComando = "guarda";
+		super("guarda");
 	}
 	
 	@Override
-	public void esegui(Partita partita) {
-		System.out.println(partita.getStanzaCorrente().getDescrizione() + "\n");
-		System.out.println(partita.getGiocatore().toString() + "\n");
-	}
-
-	@Override
-	public void setParametro(String parametro) {
-
-	}
-	
-	@Override
-	public String getNomeComando() {
-		return this.nomeComando;
-	}
-
-	@Override
-	public String getParametro() {
-		return null;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		ComandoGuarda that = (ComandoGuarda)o;
-		return this.nomeComando.equals(that.getNomeComando());
-	}
-	
-	@Override
-	public int hashCode() {
-		return 0;
+	public String esegui(Partita partita) {
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append(partita.getStanzaCorrente().getDescrizione() + "\n");
+		builder.append(partita.getGiocatore().toString() + "\n");
+		
+		return builder.toString();
 	}
 
 }

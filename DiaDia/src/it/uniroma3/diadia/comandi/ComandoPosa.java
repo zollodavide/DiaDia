@@ -8,23 +8,22 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * non pu� essere posato o non esiste, stampa un messaggio di errore
  * 
  */
-public class ComandoPosa implements Comando {
+public class ComandoPosa extends AbstractComando {
 	
-	private final String nomeComando;
 	private String attrezzoDaPosare;
 	
 	public ComandoPosa() {
-		this.nomeComando = "posa";
+		super("posa");
 	}
 
 	@Override
-	public void esegui(Partita partita) {
+	public String esegui(Partita partita) {
 		
 		if(attrezzoDaPosare==null)
-			System.out.println("Che attrezzo vuoi posare?");
+			return ("Che attrezzo vuoi posare?");
 		
 		else if(!partita.getGiocatore().getBorsa().hasAttrezzo(attrezzoDaPosare))
-			System.out.println("L'attrezzo " + attrezzoDaPosare + " non � presente nella borsa");
+			return ("L'attrezzo " + attrezzoDaPosare + " non � presente nella borsa");
 			
 		else {
 			
@@ -32,8 +31,10 @@ public class ComandoPosa implements Comando {
 					
 			if(partita.getStanzaCorrente().addAttrezzo(attrezzo)){
 				partita.getGiocatore().getBorsa().removeAttrezzo(attrezzoDaPosare);
-				System.out.println("L'attrezzo " + attrezzoDaPosare + " � stato posato nella stanza!");
+				return ("L'attrezzo " + attrezzoDaPosare + " � stato posato nella stanza!");
 			}
+			else
+				return ("L'attrezzo " + attrezzoDaPosare + " non � stato posato nella stanza!");
 
 		}	
 	}
@@ -46,27 +47,9 @@ public class ComandoPosa implements Comando {
 		this.attrezzoDaPosare = nomeAttrezzo;
 	}
 	
-	
-	
-	@Override
-	public String getNomeComando() {
-		return this.nomeComando;
-	}
-
 	@Override
 	public String getParametro() {
 		return this.attrezzoDaPosare;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		ComandoPosa that = (ComandoPosa)o;
-		return this.nomeComando.equals(that.getNomeComando()) && this.attrezzoDaPosare.equals(that.getParametro());
-	}
-	
-	@Override
-	public int hashCode() {
-		return 0;
 	}
 
 }

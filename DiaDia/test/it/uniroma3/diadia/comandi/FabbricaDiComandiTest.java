@@ -16,31 +16,25 @@ public class FabbricaDiComandiTest {
 
 	@Test
 	public void testGuarda() {
-		assertEquals(new ComandoGuarda() ,factory.costruisciComando("guarda"));		
+		assertEquals(new ComandoGuarda().getClass() ,factory.costruisciComando("guarda").getClass());		
 	}
 	
 	@Test
 	public void testNonValido() {
-		assertEquals(new ComandoNonValido(), factory.costruisciComando("non valido"));
+		assertEquals(new ComandoNonValido().getClass(), factory.costruisciComando("non valido").getClass());
 		
 	}
 	
 	@Test
 	public void testVuoto() {
-		assertEquals(new ComandoNonValido(), factory.costruisciComando(""));
+		assertEquals(new ComandoNonValido().getClass(), factory.costruisciComando("").getClass());
 		
 	}
 	
 	@Test
 	public void testNull() {
-		assertEquals(new ComandoNonValido(), factory.costruisciComando(null));
+		assertEquals(new ComandoNonValido().getClass(), factory.costruisciComando(null).getClass());
 		
 	}
 	
-	public void testVai() {
-		//assertEquals(,)
-	}
-	
-	
-
 }

@@ -16,15 +16,16 @@ public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi{
 	 * @param stringa contente l'informazione (comando e parametro)
 	 * @return l'opportuno comando
 	 */
-	public Comando costruisciComando(String istruzione) {
+	public AbstractComando costruisciComando(String istruzione) {
 		
 		if(istruzione == null)
 			return new ComandoNonValido();
 
+		@SuppressWarnings("resource")
 		Scanner scannerDiParole = new Scanner(istruzione);
 		String nomeComando = null;
 		String parametro = null;
-		Comando daEseguire = null;
+		AbstractComando daEseguire;
 
 		// prima parola: nome del comando
 		if (scannerDiParole.hasNext())
@@ -55,7 +56,16 @@ public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi{
 
 		else if (nomeComando.equals("guarda"))
 			daEseguire = new ComandoGuarda();
-
+		
+		else if (nomeComando.equals("saluta"))
+			daEseguire = new ComandoSaluta();
+		
+		else if (nomeComando.equals("interagisci"))
+			daEseguire = new ComandoInteragisci();
+		
+		else if (nomeComando.equals("regala"))
+			daEseguire = new ComandoRegala();
+		
 		else 
 			daEseguire = new ComandoNonValido();
 

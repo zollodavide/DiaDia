@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
 import static org.junit.Assert.*;
+import static it.uniroma3.diadia.properties.Costanti.CFU_INIZIALI;
 
 import org.junit.Before;
 import org.junit.Test;
