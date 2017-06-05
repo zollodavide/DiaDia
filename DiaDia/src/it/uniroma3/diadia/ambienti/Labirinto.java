@@ -30,12 +30,23 @@ public class Labirinto {
 	 * @throws FormatoFileNonValidoException 
 	 * 
 	 */
-    public Labirinto(String nomeFile) throws FileNotFoundException, FormatoFileNonValidoException {
+    public Labirinto(String nomeFile) {
 //    	init();
-    	caricatore = new CaricatoreLabirinto(nomeFile);
-    	caricatore.carica();
-    	this.entrata = caricatore.getStanzaIniziale();
-    	this.uscita =  caricatore.getStanzaVincente();
+    	
+    	try {
+			caricatore = new CaricatoreLabirinto(nomeFile);
+			caricatore.carica();
+			this.entrata = caricatore.getStanzaIniziale();
+	    	this.uscita =  caricatore.getStanzaVincente();
+    	}
+    	catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+    	catch (FormatoFileNonValidoException e) {
+			e.printStackTrace();
+		}
+    	
+    	
 	}
     
     /**

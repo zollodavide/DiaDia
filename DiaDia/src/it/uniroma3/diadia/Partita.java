@@ -24,10 +24,8 @@ public class Partita {
 	/**
 	 * Crea una nuova partita impostando il labirinto, il giocatore e 
 	 * la stanza iniziale
-	 * @throws FormatoFileNonValidoException 
-	 * @throws FileNotFoundException 
 	 */
-	public Partita() throws FileNotFoundException, FormatoFileNonValidoException{
+	public Partita() {
 		labirinto = new Labirinto("labirinto.txt");
 		giocatore = new Giocatore();
 		this.finita = false;

@@ -28,7 +28,7 @@ public class DiaDia {
 	private Partita partita;
 	private InterfacciaUtente interfaccia;
 	
-	public DiaDia() throws FileNotFoundException, FormatoFileNonValidoException {
+	public DiaDia() {
 		this.partita = new Partita();
 		this.interfaccia = new InterfacciaUtenteConsole();
 	}
@@ -84,7 +84,7 @@ public class DiaDia {
 	}   
 
 
-	public static void main(String[] argc) throws FileNotFoundException, FormatoFileNonValidoException {
+	public static void main(String[] argc) {
 		DiaDia gioco = new DiaDia();
 		gioco.gioca();
 	}
