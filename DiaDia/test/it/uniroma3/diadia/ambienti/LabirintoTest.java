@@ -12,7 +12,7 @@ public class LabirintoTest {
 
 	@Before
 	public void setUp() {
-		this.a = new Labirinto();
+		this.a = new Labirinto("labirinto.txt");
 	}
 
 	@Test
@@ -28,5 +28,5 @@ public class LabirintoTest {
 		a.setUscita(stanzaVincente);
 		assertEquals(stanzaVincente, a.getUscita());
 	}
-
+	
 }

@@ -3,12 +3,8 @@ package it.uniroma3.diadia;
 
 import static it.uniroma3.diadia.properties.Properties.MESSAGGIO_BENVENUTO;
 
-import java.io.FileNotFoundException;
-
-import it.uniroma3.diadia.ambienti.FormatoFileNonValidoException;
 import it.uniroma3.diadia.comandi.AbstractComando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
  
 /**

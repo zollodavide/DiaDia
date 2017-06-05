@@ -1,6 +1,6 @@
 package it.uniroma3.diadia.giocatore;
 
-import static it.uniroma3.diadia.properties.Costanti.CFU_INIZIALI;;
+import static it.uniroma3.diadia.properties.Properties.CFU_INIZIALI;
 
 /**
  * Questa classe ha la responsabilit� di gestire le caratteristiche del giocatore.
@@ -23,7 +23,7 @@ public class Giocatore {
 	 * e creando una nuova borsa vuota
 	 */
 	public Giocatore() {
-		this.cfu = CFU_INIZIALI.getCostant();
+		this.cfu = CFU_INIZIALI;
 		borsa = new Borsa();
 	}
 	

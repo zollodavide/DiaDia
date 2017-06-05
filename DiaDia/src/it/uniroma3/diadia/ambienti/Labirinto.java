@@ -2,9 +2,7 @@ package it.uniroma3.diadia.ambienti;
 
 import java.io.FileNotFoundException;
 
-import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
-import it.uniroma3.diadia.personaggi.Mago;
+import it.uniroma3.diadia.Partita;
 
 /**
  * Questa classe ha la responsabilit� di creare il labirinto del gioco,
@@ -26,13 +24,9 @@ public class Labirinto {
 	 * Crea il Labirinto
 	 * @param La stanza iniziale del gioco
 	 * @param La stanza finale o vincente del gioco
-	 * @throws FileNotFoundException 
-	 * @throws FormatoFileNonValidoException 
 	 * 
 	 */
     public Labirinto(String nomeFile) {
-//    	init();
-    	
     	try {
 			caricatore = new CaricatoreLabirinto(nomeFile);
 			caricatore.carica();
@@ -45,8 +39,6 @@ public class Labirinto {
     	catch (FormatoFileNonValidoException e) {
 			e.printStackTrace();
 		}
-    	
-    	
 	}
     
     /**
