@@ -15,24 +15,24 @@ public class FabbricaDiComandiTest {
 	}
 
 	@Test
-	public void testGuarda() {
+	public void testGuarda() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		assertEquals(new ComandoGuarda().getClass() ,factory.costruisciComando("guarda").getClass());		
 	}
 	
 	@Test
-	public void testNonValido() {
+	public void testNonValido() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		assertEquals(new ComandoNonValido().getClass(), factory.costruisciComando("non valido").getClass());
 		
 	}
 	
 	@Test
-	public void testVuoto() {
+	public void testVuoto() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		assertEquals(new ComandoNonValido().getClass(), factory.costruisciComando("").getClass());
 		
 	}
 	
 	@Test
-	public void testNull() {
+	public void testNull() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		assertEquals(new ComandoNonValido().getClass(), factory.costruisciComando(null).getClass());
 		
 	}

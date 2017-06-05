@@ -16,7 +16,7 @@ public interface Comando {
 	 * 
 	 * @param partita corrente
 	 */
-	public void esegui(Partita partita);
+	public String esegui(Partita partita);
 	
 	/**
 	 * Metodo che imposta il parametro del comando

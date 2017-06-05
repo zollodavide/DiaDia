@@ -6,6 +6,9 @@ public interface FabbricaDiComandi {
 	 * 
 	 * @param l'istruzione corrente
 	 * @return il comando costruito
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
 	public AbstractComando costruisciComando(String istruzione);	
 }
