@@ -1,5 +1,6 @@
-Stanze:biblioteca,N10,N11
+Stanze:biblioteca Buia lanterna,N10 Bloccata chiave sud,N11,N9 Magica 
 Inizio:N10
 Vincente:N11
-Attrezzi: martello 10 biblioteca, pinza 2 N10, chiave 1 N10
-Uscite: N10 nord biblioteca N10 sud N11
+Attrezzi: martello 10 biblioteca, pinza 2 N10, chiave 1 N9, lanterna 2 N9
+Uscite: N10 nord biblioteca N10 sud N11 N10 est N9 biblioteca sud N10 N9 ovest N10
+Personaggi: Cane N10 Fido osso,Strega biblioteca Medusa,Mago N9 Merlino spada 5

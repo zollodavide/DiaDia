@@ -12,7 +12,7 @@ public class LabirintoTest {
 
 	@Before
 	public void setUp() {
-		this.a = new Labirinto("labirinto.txt");
+		this.a = new Labirinto("/home/davide.zollo/git/DiaDia/DiaDia/resources/labirinto.txt");
 	}
 
 	@Test

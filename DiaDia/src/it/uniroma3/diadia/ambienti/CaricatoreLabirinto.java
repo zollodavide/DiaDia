@@ -1,9 +1,20 @@
 package it.uniroma3.diadia.ambienti;
 
-import java.io.*;
-import java.util.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
+import it.uniroma3.diadia.personaggi.Cane;
+import it.uniroma3.diadia.personaggi.Mago;
+import it.uniroma3.diadia.personaggi.Strega;
 
 public class CaricatoreLabirinto {
 
@@ -21,6 +32,8 @@ public class CaricatoreLabirinto {
 
 	/* prefisso della riga contenente le specifiche dei collegamenti tra stanza nel formato <nomeStanzaDa> <direzione> <nomeStanzaA> */
 	private static final String USCITE_MARKER = "Uscite:";
+	
+	private static final String PERSONAGGI_MARKER = "Personaggi:";
 
 	/*
 	 *  Esempio di un possibile file di specifica di un labirinto (vedi POO-26-eccezioni-file.pdf)
@@ -51,6 +64,7 @@ public class CaricatoreLabirinto {
 			this.leggiInizialeEvincente();
 			this.leggiECollocaAttrezzi();
 			this.leggiEImpostaUscite();
+			this.leggiEImpostaPersonaggi();
 		} finally {
 			try {
 				reader.close();
@@ -74,10 +88,52 @@ public class CaricatoreLabirinto {
 
 	private void leggiECreaStanze() throws FormatoFileNonValidoException  {
 		String nomiStanze = this.leggiRigaCheCominciaPer(STANZE_MARKER);
-		for(String nomeStanza : separaStringheAlleVirgole(nomiStanze)) {
-			Stanza stanza = new Stanza(nomeStanza);
-			this.nome2stanza.put(nomeStanza, stanza);
+		
+		for(String specificheStanza : separaStringheAlleVirgole(nomiStanze)) {
+			String nomeStanza = null;
+			String tipoStanza = null;
+			Stanza stanza = null;
+			
+			Scanner scannerLinea = new Scanner(specificheStanza);	
+			check(scannerLinea.hasNext(),msgTerminazionePrecoce("il nome della stanza da creare"));
+			nomeStanza = scannerLinea.next();
+			if(scannerLinea.hasNext()) {
+				tipoStanza = scannerLinea.next();
+
+				if(tipoStanza.equals("Magica")) {
+					if(!scannerLinea.hasNext())
+						stanza = new StanzaMagica(nomeStanza);
+					else {
+						String soglia = scannerLinea.next();
+						stanza = new StanzaMagica(nomeStanza, Integer.parseInt(soglia));
+					}
+				}
+				if(tipoStanza.equals("Bloccata")) {
+					check(scannerLinea.hasNext(),msgTerminazionePrecoce("il nome dell'attrezzo sbloccante della stanza da creare"));
+					String sbloccante = scannerLinea.next();
+					check(scannerLinea.hasNext(),msgTerminazionePrecoce("la direzione bloccata della stanza da creare"));
+					String bloccata = scannerLinea.next();
+					stanza = new StanzaBloccata(nomeStanza, sbloccante, bloccata);
+					System.out.println(nomeStanza);
+				}
+				if(tipoStanza.equals("Buia")) {
+					check(scannerLinea.hasNext(),msgTerminazionePrecoce("il nome dell'attrezzo luminoso della stanza da creare"));
+					String luminoso = scannerLinea.next();
+					stanza = new StanzaBuia(nomeStanza, luminoso);
+				}
+
+			}
+			
+			else 
+				stanza = new Stanza(nomeStanza);
+			
+			if(stanza!=null)
+				this.nome2stanza.put(nomeStanza, stanza);
+			
+			scannerLinea.close();
 		}
+		
+		System.out.println(this.nome2stanza.keySet());
 	}
 	
 	private List<String> separaStringheAlleVirgole(String string) {
@@ -121,6 +177,72 @@ public class CaricatoreLabirinto {
 			}				
 			posaAttrezzo(nomeAttrezzo, pesoAttrezzo, nomeStanza);
 		}
+	}
+	
+	private void leggiEImpostaPersonaggi() throws FormatoFileNonValidoException {
+		String specifichePersonaggi = this.leggiRigaCheCominciaPer(PERSONAGGI_MARKER);
+
+		for(String specificaPersonaggio : separaStringheAlleVirgole(specifichePersonaggi)) {
+			String tipoPersonaggio = null;
+			String nomePersonaggio = null;
+			String nomeStanza = null;
+			Object aggiuntivo = null;
+			
+			try (Scanner scannerLinea = new Scanner(specificaPersonaggio)) {
+				check(scannerLinea.hasNext(),msgTerminazionePrecoce("il tipo di un personaggio."));
+				tipoPersonaggio = scannerLinea.next();
+				check(scannerLinea.hasNext(),msgTerminazionePrecoce("il nome della stanza in cui collocare il personaggio "+tipoPersonaggio+"."));
+				nomeStanza = scannerLinea.next();
+				check(scannerLinea.hasNext(),msgTerminazionePrecoce("il nome di un personaggio."));
+				nomePersonaggio = scannerLinea.next();
+
+				if(tipoPersonaggio.equals("Cane")) {
+					check(scannerLinea.hasNext(),msgTerminazionePrecoce("il cibo preferito del cane"));
+					aggiuntivo = scannerLinea.next();
+				}
+				
+				if(tipoPersonaggio.equals("Mago")) {
+					check(scannerLinea.hasNext(),msgTerminazionePrecoce("il nome dell'attrezzo del mago"));
+					String ausiliare1 = scannerLinea.next();
+					check(scannerLinea.hasNext(),msgTerminazionePrecoce("il peso dell'attrezzo del mago"));
+					String ausiliare2 = scannerLinea.next();
+					aggiuntivo = new Attrezzo(ausiliare1, Integer.parseInt(ausiliare2));
+				}
+
+			}
+			
+			try {
+				
+				StringBuilder nomeClasse = new StringBuilder("it.uniroma3.diadia.personaggi.");
+				nomeClasse.append(tipoPersonaggio);
+				Class<?> personaggio = (Class<?>) Class.forName(nomeClasse.toString());
+
+				creaEImpostaPersonaggio(personaggio, nomeStanza, nomePersonaggio, aggiuntivo);
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+	}
+
+	private void creaEImpostaPersonaggio(Class<?> tipo, String nomeStanza, String nomePersonaggio, Object aggiuntivo) throws FormatoFileNonValidoException  {
+		AbstractPersonaggio personaggio = null;
+
+		check(isStanzaValida(nomeStanza),"Personaggio "+ nomePersonaggio+" non collocabile: stanza " +nomeStanza+" inesistente");
+
+		if(tipo == Cane.class)
+			personaggio = new Cane(nomePersonaggio, "", (String)aggiuntivo);
+		else if(tipo == Strega.class)
+			personaggio = new Strega(nomePersonaggio, "");
+		else if(tipo == Mago.class) 
+			personaggio = new Mago(nomePersonaggio, "", (Attrezzo)aggiuntivo);
+
+		if(personaggio!=null)
+			this.nome2stanza.get(nomeStanza).setPersonaggio(personaggio);
+
 	}
 
 	private void posaAttrezzo(String nomeAttrezzo, String pesoAttrezzo, String nomeStanza) throws FormatoFileNonValidoException {

@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import static it.uniroma3.diadia.properties.Properties.SOGLIA_MAGICA_DEFAULT;
 
 /**
  * Stanza che dopo aver posato attrezzi un tot numero di volte (soglia), questa modifica il nome dell'attrezzo
@@ -13,7 +14,6 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StanzaMagica extends Stanza {
 
-	final static int SOGLIA_MAGICA_DEFAULT = 3;
 	private int sogliaMagica;
 	private int contatoreAttrezziPosati;
 
