@@ -41,7 +41,7 @@ public abstract class AbstractPersonaggio {
 	
 	@Override
 	public String toString() {
-		return this.getNome();
+		return this.getNome() + " (" + this.getClass().getSimpleName() + ")";
 	}
 	
 	public void setSaluto() {

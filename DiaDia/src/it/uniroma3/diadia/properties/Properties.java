@@ -11,7 +11,12 @@ public interface Properties {
 			"puoi raccoglierli, usarli, posarli quando ti sembrano inutili\n" +
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
-
+	
+	public static final int CFU_INIZIALI = 20;
+	
+	public static final int DEFAULT_PESO_MAX_BORSA = 10;
+	
+	final static int SOGLIA_MAGICA_DEFAULT = 3;
 
 
 	public static final String MESSAGGIO_MORSO = "Il cane ti ha morso i cfu!";

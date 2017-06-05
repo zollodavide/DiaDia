@@ -104,10 +104,10 @@ public class Stanza {
 	public String toString() {
 		StringBuilder risultato = new StringBuilder();
 		risultato.append(this.nome);
-		risultato.append("\nUscite: ");
+		risultato.append("\nUscite:");
 		
 		for (String direzione : this.stanzeAdiacenti.keySet())
-			risultato.append(" " + direzione);
+			risultato.append(" " + direzione.trim());
 		risultato.append("\n\nAttrezzi nella stanza:" + "\n");
 		Collection<Attrezzo> coll = this.attrezzi.values();
 		

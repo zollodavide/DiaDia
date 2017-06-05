@@ -1,4 +1,4 @@
-package it.uniroma.diadia.giocatore;
+package it.uniroma3.diadia.giocatore;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

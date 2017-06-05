@@ -15,8 +15,7 @@ public class ComandoRegala extends AbstractComando {
 	public String esegui(Partita partita) {
 		
 		if(partita.getGiocatore().getBorsa().hasAttrezzo(attrezzoDaRegalare)) {
-			Attrezzo regalo = partita.getGiocatore().getBorsa().getAttrezzo(attrezzoDaRegalare);
-			partita.getGiocatore().getBorsa().removeAttrezzo(attrezzoDaRegalare);
+			Attrezzo regalo = partita.getGiocatore().getBorsa().removeAttrezzo(attrezzoDaRegalare);
 			return (partita.getStanzaCorrente().getPersonaggio().riceviRegalo(regalo, partita));
 		}
 		else

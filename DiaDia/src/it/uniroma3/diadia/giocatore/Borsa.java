@@ -1,6 +1,6 @@
 package it.uniroma3.diadia.giocatore;
 
-import static it.uniroma3.diadia.properties.Costanti.DEFAULT_PESO_MAX_BORSA;
+import static it.uniroma3.diadia.properties.Properties.DEFAULT_PESO_MAX_BORSA;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import java.util.List;
 import java.util.Map;
@@ -79,7 +79,7 @@ public class Borsa {
 	 *  
 	 */
 	public Borsa() {
-		this(DEFAULT_PESO_MAX_BORSA.getCostant());
+		this(DEFAULT_PESO_MAX_BORSA);
 	}
 
 	/**

@@ -22,8 +22,9 @@ public class Partita {
 	 * Crea una nuova partita impostando il labirinto, il giocatore e 
 	 * la stanza iniziale
 	 */
-	public Partita(){
-		labirinto = new Labirinto();
+	public Partita() {
+		ClassLoader l = this.getClass().getClassLoader();
+		labirinto = new Labirinto(l.getResource("labirinto.txt").getPath());
 		giocatore = new Giocatore();
 		this.finita = false;
 		stanzaCorrente = labirinto.getEntrata();

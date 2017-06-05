@@ -5,7 +5,7 @@ import static it.uniroma3.diadia.properties.Properties.MESSAGGIO_BENVENUTO;
 
 import it.uniroma3.diadia.comandi.AbstractComando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
  
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -31,6 +31,9 @@ public class DiaDia {
 
 	/**
 	 * Inizia la partita
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
 	public void gioca() {
 		String istruzione; 
@@ -56,11 +59,14 @@ public class DiaDia {
 	 * Processa una istruzione 
 	 *
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
 	private boolean processaIstruzione(String istruzione) {
 
 		AbstractComando daEseguire;
-		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
+		FabbricaDiComandi factory = new FabbricaDiComandiRiflessiva();
 		daEseguire = factory.costruisciComando(istruzione);
 		this.getInterfaccia().mostraMessaggio(daEseguire.esegui(this.partita));
 

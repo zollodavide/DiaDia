@@ -1,7 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
-import static org.junit.Assert.*;
-import static it.uniroma3.diadia.properties.Costanti.CFU_INIZIALI;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +12,7 @@ public class LabirintoTest {
 
 	@Before
 	public void setUp() {
-		this.a = new Labirinto();
+		this.a = new Labirinto("/home/davide.zollo/git/DiaDia/DiaDia/resources/labirinto.txt");
 	}
 
 	@Test
@@ -28,5 +28,5 @@ public class LabirintoTest {
 		a.setUscita(stanzaVincente);
 		assertEquals(stanzaVincente, a.getUscita());
 	}
-
+	
 }
